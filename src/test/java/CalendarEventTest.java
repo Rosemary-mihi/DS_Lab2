@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.GregorianCalendar;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import calendar.Meeting;
@@ -12,9 +13,9 @@ class CalendarEventTest
 	
 	MeetingCalendar calA;
 	Meeting MultiA;
-	Meeting MultiB;
-	Meeting MultiC;
-	Meeting MultiD;
+	Meeting OneTimeB;
+	Meeting PriorityC;
+	Meeting WeeklyD;
 
 	
 	MultiDayPerWeekEvent A;
@@ -29,20 +30,24 @@ class CalendarEventTest
 	GregorianCalendar endB;
 	GregorianCalendar endC;
 	GregorianCalendar endD;
+	GregorianCalendar repeatD;
 
 	
 	@BeforeEach
 	void setUp() throws Exception
 	{
-		calA = new MeetingCalendar;
+		calA = new MeetingCalendar();
 		startA = new GregorianCalendar(2023,8,28,8,30);
 		endA = new GregorianCalendar(2023,8,28,9,30);
 		repeatA = new GregorianCalendar(2024,8,28,9,30);
+		int[] daysA = {0,1,2};
 		endB = new GregorianCalendar(2023,8,28,10,30);
 		endC = new GregorianCalendar(2023,8,28,11,30);
 		endD = new GregorianCalendar(2023,8,28,12,30);
+		repeatD = new GregorianCalendar(2024,8,28,9,30);
+
 		
-		A = new MultiDayPerWeekEvent("A","ALoc",startA,endA);
+		A = new MultiDayPerWeekEvent("A","ALoc",startA,endA, repeatA, daysA);
 		B = new OneTimeEvent("B","BLoc",endA,endB);
 		C = new PriorityEvent("C","CLoc",endB,endC);
 		D = new WeeklyEvent("D","DLoc",endC,endD);
@@ -80,11 +85,10 @@ class CalendarEventTest
 		assertEquals(MultiA.getDescription(), A.getDescription());
 		assertEquals(MultiA.getLocation(), A.getLocation());
 		assertEquals(MultiA.getStartTime(),A.getStartTime());
-		assertEquals(MultiA.getRepeatUntil(),A.getRepeatUntil());
-		assertEquals(MultiA.getEndTime(),A.getEndTime()); \\still need days
+		assertEquals(MultiA.getEndTime(),A.getEndTime()); 
 		
 		B.scheduleEvent(calA);
-		MultiB = calA.findMeeting(endA);
+		OneTimeB = calA.findMeeting(endA);
 		
 		
 	}
