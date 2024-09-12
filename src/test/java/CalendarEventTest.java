@@ -50,7 +50,7 @@ class CalendarEventTest
 		A = new MultiDayPerWeekEvent("A","ALoc",startA,endA, repeatA, daysA);
 		B = new OneTimeEvent("B","BLoc",endA,endB);
 		C = new PriorityEvent("C","CLoc",endB,endC);
-		D = new WeeklyEvent("D","DLoc",endC,endD);
+		D = new WeeklyEvent("D","DLoc",endC,endD, repeatD);
 
 	}
 	@Test
