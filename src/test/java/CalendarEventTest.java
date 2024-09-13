@@ -254,6 +254,28 @@ class CalendarEventTest
 		assertNotNull(calA.findMeeting(endB));
 		assertNotNull(calA.findMeeting(endC));
 
+		assertEquals("A",testA.getDescription());
+		assertEquals("ALoc",testA.getLocation());
+		assertEquals(startA,testA.getStartTime());
+		assertEquals(repeatA,testA.getRepeatUntil());
+		assertEquals(endA,testA.getEndTime());
+		assertArrayEquals(daysA, testA.getDays());
+		
+		assertEquals("B",B.getDescription());
+		assertEquals("BLoc",B.getLocation());
+		assertEquals(endA,B.getStartTime());
+		assertEquals(endB,B.getEndTime());
+		
+		assertEquals("C",C.getDescription());
+		assertEquals("CLoc",C.getLocation());
+		assertEquals(endB,C.getStartTime());
+		assertEquals(endC,C.getEndTime());
+		
+		assertEquals("D",D.getDescription());
+		assertEquals("DLoc",D.getLocation());
+		assertEquals(endC,D.getStartTime());
+		assertEquals(repeatD,D.getRepeatUntil());
+		assertEquals(endD,D.getEndTime());
 	}
 
 }
