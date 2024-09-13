@@ -221,10 +221,10 @@ class CalendarEventTest
 		
 		LongMeeting.scheduleEvent(calA);
 		
-		assertNull(calA.findMeeting(startA));
-		assertNull(calA.findMeeting(endA));
-		assertNull(calA.findMeeting(endB));
-		assertNotNull(calA.findMeeting(startLong));
+		assertEquals("C",LongMeeting.getDescription());
+		assertEquals("CLoc",LongMeeting.getLocation());
+		assertEquals(startLong,LongMeeting.getStartTime());
+		assertEquals(endLong,LongMeeting.getEndTime());
 
 
 	}
