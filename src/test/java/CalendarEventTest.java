@@ -249,6 +249,8 @@ class CalendarEventTest
 		
 		LongMeetingW.scheduleEvent(calA);
 		
+		assertNull(calA.findMeeting(startLongW));
+		
 		assertNotNull(calA.findMeeting(startA));
 		assertNotNull(calA.findMeeting(endA));
 		assertNotNull(calA.findMeeting(endB));
