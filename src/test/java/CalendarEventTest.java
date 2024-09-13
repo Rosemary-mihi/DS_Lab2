@@ -13,9 +13,9 @@ class CalendarEventTest
 	
 	MeetingCalendar calA;
 	MultiDayPerWeekEvent MultiA;
-	Meeting OneTimeB;
-	Meeting PriorityC;
-	Meeting WeeklyD;
+	OneTimeEvent OneTimeB;
+	PriorityEvent PriorityC;
+	WeeklyEvent WeeklyD;
 
 	
 	MultiDayPerWeekEvent A;
@@ -109,12 +109,32 @@ class CalendarEventTest
 		A.scheduleEvent(calA);
 		MultiA = new MultiDayPerWeekEvent("A","ALoc",startA, endA, repeatA, daysA);
 		MultiA.scheduleEvent(calA);
+		
 		B.scheduleEvent(calA);
-		C.scheduleEvent(calA);
+		OneTimeB = new OneTimeEvent("B","BLoc",endA,endB);
+		OneTimeB.scheduleEvent(calA);
+		
+		C.scheduleEvent(calA); //the new priority event should get rid of the old one
+		PriorityC = new PriorityEvent("C","CLoc",endB,endC);
+		PriorityC.scheduleEvent(calA);
+		
 		D.scheduleEvent(calA);
+		WeeklyD = new WeeklyEvent("D","DLoc",endC,endD, repeatD);
+		WeeklyD.scheduleEvent(calA);
+
 		
 		assertNotEquals(MultiA, calA.findMeeting(startA));
-		assertNull(MultiA);
+		assertNull(calA.findMeeting(startA));//why is this working??
+		
+		assertNotEquals(OneTimeB, calA.findMeeting(endA));
+		assertNull(calA.findMeeting(endA));
+		
+		assertNotEquals(PriorityC, calA.findMeeting(endB));
+		assertNotNull(calA.findMeeting(endB));
+		
+		assertNotEquals(WeeklyD, calA.findMeeting(endC));
+		assertNull(calA.findMeeting(endC));
+		//assertNull(MultiA);
 		//assertNull(calA.findMeeting(startA));//when you dont want an event to be there
 		//can't do assertEquals
 		//newMeeting = new Meeting(a.getMeetingName(),)
