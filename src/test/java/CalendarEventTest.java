@@ -178,17 +178,17 @@ class CalendarEventTest
 	void testWeeklyRepeat()
 	{
 		D.scheduleEvent(calA);
-		GregorianCalendar thursday1 = new GregorianCalendar(2023,2,28,8,30);
-		GregorianCalendar thursday2 = new GregorianCalendar(2023,9,5,8,30);
-		GregorianCalendar thursday3 = new GregorianCalendar(2023,9,12,8,30);
+		GregorianCalendar thursday1 = new GregorianCalendar(2023,2,28,11,30);
+		GregorianCalendar thursday2 = new GregorianCalendar(2023,9,5,11,30);
+		GregorianCalendar thursday3 = new GregorianCalendar(2023,9,12,11,30);
 
-		GregorianCalendar wrongDay1 = new GregorianCalendar(2023,8,21,8,30);
-		GregorianCalendar wrongDay2 = new GregorianCalendar(2023,8,27,8,30);
-		GregorianCalendar wrongDay3 = new GregorianCalendar(2023,8,29,8,30);
-		GregorianCalendar wrongDay4 = new GregorianCalendar(2023,9,11,8,30);
-		GregorianCalendar wrongDay5 = new GregorianCalendar(2023,9,13,8,30);
-		GregorianCalendar wrongDay6 = new GregorianCalendar(2023,9,15,8,30);
-		GregorianCalendar wrongDay7 = new GregorianCalendar(2023,9,19,8,30);
+		GregorianCalendar wrongDay1 = new GregorianCalendar(2023,8,21,11,30);
+		GregorianCalendar wrongDay2 = new GregorianCalendar(2023,8,27,11,30);
+		GregorianCalendar wrongDay3 = new GregorianCalendar(2023,8,29,11,30);
+		GregorianCalendar wrongDay4 = new GregorianCalendar(2023,9,11,11,30);
+		GregorianCalendar wrongDay5 = new GregorianCalendar(2023,9,13,11,30);
+		GregorianCalendar wrongDay6 = new GregorianCalendar(2023,9,15,11,30);
+		GregorianCalendar wrongDay7 = new GregorianCalendar(2023,9,19,11,30);
 
 		assertNotNull(calA.findMeeting(thursday1));
 		assertNotNull(calA.findMeeting(thursday2));
