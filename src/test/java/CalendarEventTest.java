@@ -178,7 +178,7 @@ class CalendarEventTest
 	void testWeeklyRepeat()
 	{
 		D.scheduleEvent(calA);
-		GregorianCalendar thursday1 = new GregorianCalendar(2023,2,28,11,30);
+		GregorianCalendar thursday1 = new GregorianCalendar(2023,8,28,11,30);
 		GregorianCalendar thursday2 = new GregorianCalendar(2023,9,5,11,30);
 		GregorianCalendar thursday3 = new GregorianCalendar(2023,9,12,11,30);
 
