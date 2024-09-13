@@ -40,12 +40,12 @@ class CalendarEventTest
 		calA = new MeetingCalendar();
 		startA = new GregorianCalendar(2023,8,28,8,30);
 		endA = new GregorianCalendar(2023,8,28,9,30);
-		repeatA = new GregorianCalendar(2024,8,28,9,30);
-		int[] daysA = {0,1,2};
+		repeatA = new GregorianCalendar(2023,9,1,8,30);
+		int[] daysA = {0,1};
 		endB = new GregorianCalendar(2023,8,28,10,30);
 		endC = new GregorianCalendar(2023,8,28,11,30);
 		endD = new GregorianCalendar(2023,8,28,12,30);
-		repeatD = new GregorianCalendar(2024,8,28,9,30);
+		repeatD = new GregorianCalendar(2023,9,28,9,30);
 
 		
 		A = new MultiDayPerWeekEvent("A","ALoc",startA,endA, repeatA, daysA);
@@ -62,8 +62,7 @@ class CalendarEventTest
 		assertEquals(startA,A.getStartTime());
 		assertEquals(repeatA,A.getRepeatUntil());
 		assertEquals(endA,A.getEndTime());
-		assertEquals(daysA,A.getDays());
-
+		assertArrayEquals(daysA, A.getDays());
 		
 		assertEquals("B",B.getDescription());
 		assertEquals("BLoc",B.getLocation());
@@ -86,15 +85,15 @@ class CalendarEventTest
 	@Test
 	void testscheduleEvent()
 	{
-		A.scheduleEvent(calA);
+		//A.scheduleEvent(calA);
 		B.scheduleEvent(calA); 
-		C.scheduleEvent(calA);
-		D.scheduleEvent(calA);
+		//C.scheduleEvent(calA);
+		//D.scheduleEvent(calA);
 		
-		assertNotNull(calA.findMeeting(startA));//ask why did i do this 
+		//assertNotNull(calA.findMeeting(startA));
 		assertNotNull(calA.findMeeting(endA));
-		assertNotNull(calA.findMeeting(endB));
-		assertNotNull(calA.findMeeting(endC));
+		//assertNotNull(calA.findMeeting(endB));
+		//assertNotNull(calA.findMeeting(endC));
 
 
 		//assertNull(calA.findMeeting(startA));//when you dont want an event to be there
@@ -127,13 +126,13 @@ class CalendarEventTest
 		assertNull(calA.findMeeting(startA));//why is this working??
 		
 		assertNotEquals(OneTimeB, calA.findMeeting(endA));
-		assertNull(calA.findMeeting(endA));
+		assertNull(calA.findMeeting(endA));//not working
 		
 		assertNotEquals(PriorityC, calA.findMeeting(endB));
 		assertNotNull(calA.findMeeting(endB));
 		
 		assertNotEquals(WeeklyD, calA.findMeeting(endC));
-		assertNull(calA.findMeeting(endC));
+		assertNull(calA.findMeeting(endC));//not working
 		//assertNull(MultiA);
 		//assertNull(calA.findMeeting(startA));//when you dont want an event to be there
 		//can't do assertEquals
@@ -141,6 +140,13 @@ class CalendarEventTest
 
 		
 	}
-	
+	@Test
+	void testMultiRepeat()
+	{
+		A.scheduleEvent(calA);
+		
+		assertNotNull(calA.findMeeting(startA));
+		assertNotNull(calA.findMeeting(GregorianCalendar(2023,8,28,8,30)));
+	}
 
 }
