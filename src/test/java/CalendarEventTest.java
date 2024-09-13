@@ -272,4 +272,22 @@ class CalendarEventTest
 		testA.scheduleEvent(calA);		
 		assertNull(calA.findMeeting(startLongW));
 	}
+	@Test
+	void testOneTimeEventDisplace()
+	{
+		GregorianCalendar startLongW = new GregorianCalendar(2023,8,28,7,30);
+		GregorianCalendar endLongW = new GregorianCalendar(2023,8,28,12,30);		
+		OneTimeEvent testOneTime = new OneTimeEvent("A","ALoc",startLongW,endLongW);
+		
+		B.scheduleEvent(calA); 
+		C.scheduleEvent(calA);
+		D.scheduleEvent(calA);
+		
+		assertNotNull(calA.findMeeting(endA));
+		assertNotNull(calA.findMeeting(endB));
+		assertNotNull(calA.findMeeting(endC));
+		
+		testOneTime.scheduleEvent(calA);		
+		assertNull(calA.findMeeting(startLongW));
+	}
 }
