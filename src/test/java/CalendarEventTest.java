@@ -261,6 +261,7 @@ class CalendarEventTest
 		int[] daysA = {GregorianCalendar.MONDAY,GregorianCalendar.THURSDAY};//making it so testA will happen during LongMeeting
 		MultiDayPerWeekEvent testA = new MultiDayPerWeekEvent("A","ALoc",startLongW,endLongW, repeatA, daysA);
 		
+		A.scheduleEvent(calA); 
 		B.scheduleEvent(calA); 
 		C.scheduleEvent(calA);
 		D.scheduleEvent(calA);
