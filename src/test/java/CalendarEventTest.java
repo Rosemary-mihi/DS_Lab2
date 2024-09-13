@@ -31,7 +31,7 @@ class CalendarEventTest
 	GregorianCalendar endC;
 	GregorianCalendar endD;
 	GregorianCalendar repeatD;
-	int[] daysA = {0,1,2};
+	int[] daysA = {GregorianCalendar.MONDAY,GregorianCalendar.WEDNESDAY};
 
 	
 	@BeforeEach
@@ -40,8 +40,8 @@ class CalendarEventTest
 		calA = new MeetingCalendar();
 		startA = new GregorianCalendar(2023,8,28,8,30);
 		endA = new GregorianCalendar(2023,8,28,9,30);
-		repeatA = new GregorianCalendar(2023,9,1,8,30);
-		int[] daysA = {0,1};
+		repeatA = new GregorianCalendar(2023,9,10,8,30);
+		int[] daysA = {GregorianCalendar.MONDAY,GregorianCalendar.WEDNESDAY};
 		endB = new GregorianCalendar(2023,8,28,10,30);
 		endC = new GregorianCalendar(2023,8,28,11,30);
 		endD = new GregorianCalendar(2023,8,28,12,30);
@@ -85,12 +85,13 @@ class CalendarEventTest
 	@Test
 	void testscheduleEvent()
 	{
-		//A.scheduleEvent(calA);
+		A.scheduleEvent(calA);
+		GregorianCalendar firstA = new GregorianCalendar(2023,9,2,8,30);
 		B.scheduleEvent(calA); 
 		//C.scheduleEvent(calA);
 		//D.scheduleEvent(calA);
 		
-		//assertNotNull(calA.findMeeting(startA));
+		assertNotNull(calA.findMeeting(firstA));
 		assertNotNull(calA.findMeeting(endA));
 		//assertNotNull(calA.findMeeting(endB));
 		//assertNotNull(calA.findMeeting(endC));
