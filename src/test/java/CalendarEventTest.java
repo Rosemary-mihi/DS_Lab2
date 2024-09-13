@@ -12,7 +12,7 @@ class CalendarEventTest
 {
 	
 	MeetingCalendar calA;
-	Meeting MultiA;
+	MultiDayPerWeekEvent MultiA;
 	Meeting OneTimeB;
 	Meeting PriorityC;
 	Meeting WeeklyD;
@@ -31,6 +31,7 @@ class CalendarEventTest
 	GregorianCalendar endC;
 	GregorianCalendar endD;
 	GregorianCalendar repeatD;
+	int[] daysA = {0,1,2};
 
 	
 	@BeforeEach
@@ -61,6 +62,8 @@ class CalendarEventTest
 		assertEquals(startA,A.getStartTime());
 		assertEquals(repeatA,A.getRepeatUntil());
 		assertEquals(endA,A.getEndTime());
+		assertEquals(daysA,A.getDays());
+
 		
 		assertEquals("B",B.getDescription());
 		assertEquals("BLoc",B.getLocation());
@@ -75,21 +78,47 @@ class CalendarEventTest
 		assertEquals("D",D.getDescription());
 		assertEquals("DLoc",D.getLocation());
 		assertEquals(endC,D.getStartTime());
+		assertEquals(repeatD,D.getRepeatUntil());
 		assertEquals(endD,D.getEndTime());
+		
 	}
+	
 	@Test
 	void testscheduleEvent()
 	{
 		A.scheduleEvent(calA);
-		MultiA = calA.findMeeting(startA);
-		assertEquals(MultiA.getDescription(), A.getDescription());
-		assertEquals(MultiA.getLocation(), A.getLocation());
-		assertEquals(MultiA.getStartTime(),A.getStartTime());
-		assertEquals(MultiA.getEndTime(),A.getEndTime()); 
+		B.scheduleEvent(calA); 
+		C.scheduleEvent(calA);
+		D.scheduleEvent(calA);
 		
+		assertNotNull(calA.findMeeting(startA));//ask why did i do this 
+		assertNotNull(calA.findMeeting(endA));
+		assertNotNull(calA.findMeeting(endB));
+		assertNotNull(calA.findMeeting(endC));
+
+
+		//assertNull(calA.findMeeting(startA));//when you dont want an event to be there
+		//can't do assertEquals
+		//newMeeting = new Meeting(a.getMeetingName(),)
+		//assertNotEquals(newMeeting, calA.findMeeting()))		
+	}
+	@Test
+	void testNoOverlap()
+	{
+		//make another meeting to test for overlap 
+		A.scheduleEvent(calA);
+		MultiA = new MultiDayPerWeekEvent("A","ALoc",startA, endA, repeatA, daysA);
+		MultiA.scheduleEvent(calA);
 		B.scheduleEvent(calA);
-		OneTimeB = calA.findMeeting(endA);
+		C.scheduleEvent(calA);
+		D.scheduleEvent(calA);
 		
+		assertNotEquals(MultiA, calA.findMeeting(startA));
+		assertNull(MultiA);
+		//assertNull(calA.findMeeting(startA));//when you dont want an event to be there
+		//can't do assertEquals
+		//newMeeting = new Meeting(a.getMeetingName(),)
+
 		
 	}
 	
