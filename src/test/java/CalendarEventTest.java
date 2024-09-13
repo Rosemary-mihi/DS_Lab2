@@ -228,5 +228,32 @@ class CalendarEventTest
 
 
 	}
+	@Test
+	void testWeeklyEventDisplace()
+	{
+		GregorianCalendar startLongW = new GregorianCalendar(2023,8,28,7,30);
+		GregorianCalendar endLongW = new GregorianCalendar(2023,8,28,12,30);
+		WeeklyEvent LongMeetingW = new WeeklyEvent("C","CLoc",startLongW,endLongW,repeatD);
+		
+		int[] daysA = {GregorianCalendar.MONDAY,GregorianCalendar.THURSDAY};//making it so testA will happen during LongMeeting
+		MultiDayPerWeekEvent testA = new MultiDayPerWeekEvent("A","ALoc",startA,endA, repeatA, daysA);
+		testA.scheduleEvent(calA);
+		B.scheduleEvent(calA); 
+		C.scheduleEvent(calA);
+		D.scheduleEvent(calA);
+		
+		assertNotNull(calA.findMeeting(startA));
+		assertNotNull(calA.findMeeting(endA));
+		assertNotNull(calA.findMeeting(endB));
+		assertNotNull(calA.findMeeting(endC));
+		
+		LongMeetingW.scheduleEvent(calA);
+		
+		assertNotNull(calA.findMeeting(startA));
+		assertNotNull(calA.findMeeting(endA));
+		assertNotNull(calA.findMeeting(endB));
+		assertNotNull(calA.findMeeting(endC));
+
+	}
 
 }
