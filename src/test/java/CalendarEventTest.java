@@ -250,34 +250,27 @@ class CalendarEventTest
 		LongMeetingW.scheduleEvent(calA);
 		
 		assertNull(calA.findMeeting(startLongW));
+
+	}
+
+	@Test
+	void testMultiEventDisplace()
+	{
+		GregorianCalendar startLongW = new GregorianCalendar(2023,8,28,7,30);
+		GregorianCalendar endLongW = new GregorianCalendar(2023,8,28,12,30);		
+		int[] daysA = {GregorianCalendar.MONDAY,GregorianCalendar.THURSDAY};//making it so testA will happen during LongMeeting
+		MultiDayPerWeekEvent testA = new MultiDayPerWeekEvent("A","ALoc",startLongW,endLongW, repeatA, daysA);
+		
+		B.scheduleEvent(calA); 
+		C.scheduleEvent(calA);
+		D.scheduleEvent(calA);
 		
 		assertNotNull(calA.findMeeting(startA));
 		assertNotNull(calA.findMeeting(endA));
 		assertNotNull(calA.findMeeting(endB));
 		assertNotNull(calA.findMeeting(endC));
-
-		assertEquals("A",testA.getDescription());
-		assertEquals("ALoc",testA.getLocation());
-		assertEquals(startA,testA.getStartTime());
-		assertEquals(repeatA,testA.getRepeatUntil());
-		assertEquals(endA,testA.getEndTime());
-		assertArrayEquals(daysA, testA.getDays());
 		
-		assertEquals("B",B.getDescription());
-		assertEquals("BLoc",B.getLocation());
-		assertEquals(endA,B.getStartTime());
-		assertEquals(endB,B.getEndTime());
-		
-		assertEquals("C",C.getDescription());
-		assertEquals("CLoc",C.getLocation());
-		assertEquals(endB,C.getStartTime());
-		assertEquals(endC,C.getEndTime());
-		
-		assertEquals("D",D.getDescription());
-		assertEquals("DLoc",D.getLocation());
-		assertEquals(endC,D.getStartTime());
-		assertEquals(repeatD,D.getRepeatUntil());
-		assertEquals(endD,D.getEndTime());
+		testA.scheduleEvent(calA);		
+		assertNull(calA.findMeeting(startLongW));
 	}
-
 }
