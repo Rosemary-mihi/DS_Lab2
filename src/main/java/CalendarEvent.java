@@ -1,17 +1,25 @@
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+
+import calendar.Meeting;
 import calendar.MeetingCalendar;
 
 
 public abstract class CalendarEvent
-{
+{	
 	private String Description;
 	private String location;
 	private GregorianCalendar startTime;
 	private GregorianCalendar endTime;
 	
-	public CalendarEvent(String desc, String loc, GregorianCalendar start, GregorianCalendar end)
+	public CalendarEvent(String Description, String location, GregorianCalendar startTime, GregorianCalendar endTime)
 	{
-		
+		//super(Description, location, startTime, endTime);
+		this.Description = Description;
+		this.location = location;
+		this.startTime = startTime;
+		this.endTime = endTime;
+
 	}
 	public abstract void scheduleEvent(MeetingCalendar cal);
 	public String getDescription()
